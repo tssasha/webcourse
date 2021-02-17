@@ -1,3 +1,5 @@
+# Структура базы данных
+![Alt-текст](https://github.com/tssasha/webcourse/blob/main/forumdb.png)
 
 # Описание страниц
 **Верхнее меню на всех страницах:**
