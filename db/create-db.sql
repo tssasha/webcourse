@@ -13,15 +13,15 @@ CREATE TABLE IF NOT EXISTS sections (
     section_name text NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS files (
-    file text PRIMARY KEY,  --path to file
-    message_no integer REFERENCES topics
-);
-
 CREATE TABLE IF NOT EXISTS topics (
-    message_no integer PRIMARY KEY,
+    message_no SERIAL PRIMARY KEY,
     topic_name text REFERENCES sections,
     message text NOT NULL,
     user_login text REFERENCES users,
     time_stamp date DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE IF NOT EXISTS files (
+    file text PRIMARY KEY,  --path to file
+    message_no integer REFERENCES topics
 );
