@@ -7,12 +7,12 @@ INSERT INTO users VALUES
                          ('Programming', 'sdkjf&&ssdj56gsFDFG', '12/04/2006', 'Модератор', 'Сертификаты Cisco: CompTIA A+, Cisco CCENT, Cisco CCNA
 Сертификаты Microsoft: MCSE: Core Infrastructure, MCSE Productivity Solutions Expert, MCSE: Business Applications');
 
-INSERT INTO sections VALUES
+INSERT INTO topics VALUES
                         ('Про отладку программ', 'Java для начинающих'),
                         ('Сравнение строк (String) в java. Мини гайд для начинающих', 'Java для начинающих'),
                         ('Прозрачные окна в JAVA', 'Java: GUI, Графика')
 
-INSERT INTO topics VALUES
+INSERT INTO messages VALUES
                         (DEFAULT, 'Про отладку программ', 'Не знаю, потянет ли на "важную" тему, но можно ссылкой на эту, уже кидаться)).' ||
                                                  '
 ======================================' ||
@@ -88,4 +88,4 @@ INSERT INTO topics VALUES
                                'Мда.. действительно работает.' ||
                                'Прикольно..' ||
                                'Я у себя подсказки всплывающие так сделал теперь.', 'InvalidCode', '14/01/2016 23:05'),
-                          (DEFAULT, 'Прозрачные окна в JAVA', 'И без этого можно - Component.setTooltipText()', 'Aviz__', '11/06/2017 12:13');
+                          (DEFAULT, 'Прозрачные окна в JAVA', 'И без этого можно - Component.setTooltipText()', 'Programming', '11/06/2017 12:13');

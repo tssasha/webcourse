@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS users (
     description text
 );
 
-CREATE TABLE IF NOT EXISTS sections (
+CREATE TABLE IF NOT EXISTS topics (
     topic_name text PRIMARY KEY,
     section_name text NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS topics (
+CREATE TABLE IF NOT EXISTS messages (
     message_no SERIAL PRIMARY KEY,
-    topic_name text REFERENCES sections,
+    topic_name text REFERENCES topics,
     message text NOT NULL,
     user_login text REFERENCES users,
     time_stamp date DEFAULT CURRENT_DATE
@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS topics (
 
 CREATE TABLE IF NOT EXISTS files (
     file text PRIMARY KEY,  --path to file
-    message_no integer REFERENCES topics
+    message_no integer REFERENCES messages
 );
