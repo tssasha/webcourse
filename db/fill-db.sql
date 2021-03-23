@@ -89,3 +89,5 @@ INSERT INTO messages VALUES
                                'Прикольно..' ||
                                'Я у себя подсказки всплывающие так сделал теперь.', 'InvalidCode', '14/01/2016 23:05'),
                           (DEFAULT, 'Прозрачные окна в JAVA', 'И без этого можно - Component.setTooltipText()', 'Programming', '11/06/2017 12:13');
+
+DELETE FROM topics WHERE topic_name = 'Новая тема';

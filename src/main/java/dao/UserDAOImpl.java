@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
             TypedQuery<User> query = session.createQuery(
-                    "SELECT u FROM users u WHERE u.user_login = :login"
+                    "SELECT u FROM User u WHERE u.user_login = :login"
             ).setParameter("login", login);
             return query.getSingleResult();
         } catch(NoResultException ex) {
@@ -52,10 +52,18 @@ public class UserDAOImpl implements UserDAO {
         session.close();
     }
 
-    @Override
-    public Topic findTopicById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Topic.class, id);
-    }
+//    @Override
+//    public Topic findTopicByName(String name) {
+//        try {
+//            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//            TypedQuery<Topic> query = session.createQuery(
+//                    "SELECT t FROM topics t WHERE t.topic_name = :name"
+//            ).setParameter("name", name);
+//            return query.getSingleResult();
+//        } catch(NoResultException ex) {
+//            return null;
+//        }
+//    }
 
     @Override
     public List<User> findAll() {

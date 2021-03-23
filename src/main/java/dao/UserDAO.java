@@ -14,7 +14,7 @@ public interface UserDAO {
 
     void delete(User user);
 
-    Topic findTopicById(int id);
+    //Topic findTopicByName(String name);
 
     List<User> findAll();
 }

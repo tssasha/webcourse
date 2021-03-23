@@ -11,7 +11,7 @@ public class File {
     private int message_no;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_no")
+    @JoinColumn(name = "message_no", insertable=false, updatable=false)
     private Message message;
 
     public File() {
@@ -38,9 +38,7 @@ public class File {
         message_no = no;
     }
 
-    public Message getMessage() {
-        return message;
-    }
+    public Message getMessage() { return message; }
     public void setMessage(Message mess) {
         message = mess;
     }

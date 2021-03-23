@@ -15,23 +15,24 @@ public class Message {
     private String topic_name;
     private String message;
     private String user_login;
-    private String time_stamp;
+    private java.sql.Timestamp time_stamp;
 
     @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<File> files;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_login")
+    @JoinColumn(name = "user_login", insertable=false, updatable=false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_name")
+    @JoinColumn(name = "topic_name", insertable=false, updatable=false)
     private Topic topic;
 
-    Message() {
+    public Message() {
     }
 
-    Message(String name, String mess, String login, String time) {
+    public Message(int no, String name, String mess, String login, java.sql.Timestamp time) {
+        message_no = no;
         topic_name = name;
         message = mess;
         user_login = login;
@@ -73,10 +74,10 @@ public class Message {
         user_login = login;
     }
 
-    public String getTimeStamp() {
+    public java.sql.Timestamp getTimeStamp() {
         return time_stamp;
     }
-    public void setTimeStamp(String time) {
+    public void setTimeStamp(java.sql.Timestamp time) {
         time_stamp = time;
     }
 

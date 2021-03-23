@@ -8,11 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import java.util.List;
+
 public class MessageDAOImpl implements MessageDAO {
-    @Override
-    public Message findByNo(int no) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Message.class, no);
-    }
 
     @Override
     public void save(Message message) {
@@ -41,23 +41,43 @@ public class MessageDAOImpl implements MessageDAO {
         session.close();
     }
 
-    @Override
-    public User findUserById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
-    }
-
-    @Override
-    public Topic findTopicById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Topic.class, id);
-    }
-
-    @Override
-    public File findFileById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(File.class, id);
-    }
-
-//    public List<Message> findAll() {
-//        List<Message> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
-//        return users;
+//    @Override
+//    public User findUserByLogin(String login) {
+//        try {
+//            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//            TypedQuery<User> query = session.createQuery(
+//                    "SELECT u FROM users u WHERE u.user_login = :login"
+//            ).setParameter("login", login);
+//            return query.getSingleResult();
+//        } catch(NoResultException ex) {
+//            return null;
+//        }
 //    }
+//
+//    @Override
+//    public Topic findTopicByName(String name) {
+//        try {
+//            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//            TypedQuery<Topic> query = session.createQuery(
+//                    "SELECT t FROM topics t WHERE t.topic_name = :name"
+//            ).setParameter("name", name);
+//            return query.getSingleResult();
+//        } catch(NoResultException ex) {
+//            return null;
+//        }
+//    }
+//
+//    @Override
+//    public File findFileById(int id) {
+//        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(File.class, id);
+//    }
+
+    @Override
+    public List<Message> findAllMessagesInTopic(String name) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        TypedQuery<Message> query = session.createQuery(
+                "SELECT m FROM Message m WHERE m.topic_name = :name"
+        ).setParameter("name", name);;
+        return query.getResultList();
+    }
 }

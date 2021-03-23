@@ -1,5 +1,6 @@
 package dao;
 
+import models.Message;
 import models.Topic;
 import models.User;
 import org.hibernate.Session;
@@ -13,11 +14,11 @@ import java.util.List;
 public class TopicDAOImpl implements TopicDAO {
 
     @Override
-    public User findByName(String name) {
+    public Topic findByName(String name) {
         try {
             Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-            TypedQuery<User> query = session.createQuery(
-                    "SELECT t FROM topics t WHERE t.topic_name = :name"
+            TypedQuery<Topic> query = session.createQuery(
+                    "SELECT t FROM Topic t WHERE t.topic_name = :name"
             ).setParameter("name", name);
             return query.getSingleResult();
         } catch(NoResultException ex) {
@@ -52,15 +53,32 @@ public class TopicDAOImpl implements TopicDAO {
         session.close();
     }
 
-    @Override
-    public User findUserById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
-    }
+//    @Override
+//    public User findUserByLogin(String login) {
+//        try {
+//            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//            TypedQuery<User> query = session.createQuery(
+//                    "SELECT u FROM users u WHERE u.user_login = :login"
+//            ).setParameter("login", login);
+//            return query.getSingleResult();
+//        } catch(NoResultException ex) {
+//            return null;
+//        }
+//    }
 
     @Override
     public List<Topic> findAll() {
         List<Topic> topics = (List<Topic>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Topic").list();
         return topics;
+    }
+
+    @Override
+    public List<Topic> findAllTopicsInSection(String name) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        TypedQuery<Topic> query = session.createQuery(
+                "SELECT t FROM Topic t WHERE t.section_name = :name"
+        ).setParameter("name", name);;
+        return query.getResultList();
     }
 }
 

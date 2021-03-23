@@ -5,8 +5,9 @@ import models.Message;
 import models.Topic;
 import models.User;
 
+import java.util.List;
+
 public interface MessageDAO {
-    Message findByNo(int no);
 
     void save(Message message);
 
@@ -14,9 +15,11 @@ public interface MessageDAO {
 
     void delete(Message message);
 
-    User findUserById(int id);
+//    User findUserByLogin(String login);
+//
+//    Topic findTopicByName(String name);
+//
+//    File findFileById(int id);
 
-    Topic findTopicById(int id);
-
-    File findFileById(int id);
+    List<Message> findAllMessagesInTopic(String name);
 }

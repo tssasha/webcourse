@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TopicDAO {
 
-    User findByName(String name);
+    Topic findByName(String name);
 
     void save(Topic topic);
 
@@ -15,7 +15,10 @@ public interface TopicDAO {
 
     void delete(Topic topic);
 
-    User findUserById(int id);
+    //User findUserByLogin(String login);
 
     List<Topic> findAll();
+
+    List<Topic> findAllTopicsInSection(String name);
+
 }

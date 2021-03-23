@@ -11,17 +11,17 @@ public class User {
     @Id
     private String user_login;
     private String user_password;
-    private String reg_date;
+    private java.sql.Date reg_date;
     private String rights;
     private String description;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
-    User() {
+    public User() {
     }
 
-    User(String login, String password, String date, String right, String desc) {
+    public User(String login, String password, java.sql.Date date, String right, String desc) {
         user_login = login;
         user_password = password;
         reg_date = date;
@@ -53,10 +53,10 @@ public class User {
         user_password = password;
     }
 
-    public String getRegDate() {
+    public java.sql.Date getRegDate() {
         return reg_date;
     }
-    public void setRegDate(String date) {
+    public void setRegDate(java.sql.Date date) {
         reg_date = date;
     }
 

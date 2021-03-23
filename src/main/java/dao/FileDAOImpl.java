@@ -5,6 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
+import javax.persistence.TypedQuery;
+import java.util.List;
+
 public class FileDAOImpl implements FileDAO {
 
     @Override
@@ -25,8 +28,12 @@ public class FileDAOImpl implements FileDAO {
         session.close();
     }
 
-//    public List<User> findAll() {
-//        List<User> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
-//        return users;
-//    }
+    @Override
+    public List<File> findAllFilesInMessage(int no) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        TypedQuery<File> query = session.createQuery(
+                "SELECT f FROM File f WHERE f.message_no = :no"
+        ).setParameter("no", no);;
+        return query.getResultList();
+    }
 }
