@@ -31,6 +31,10 @@ public class TopicService {
         return topicsDao.findAll();
     }
 
+    public List<Topic> findAllSections() {
+        return topicsDao.findAllSections();
+    }
+
     public List<Topic> findAllTopicsInSection(String name) {
         return topicsDao.findAllTopicsInSection(name);
     }

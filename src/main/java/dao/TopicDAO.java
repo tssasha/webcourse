@@ -19,6 +19,8 @@ public interface TopicDAO {
 
     List<Topic> findAll();
 
+    List<Topic> findAllSections();
+
     List<Topic> findAllTopicsInSection(String name);
 
 }

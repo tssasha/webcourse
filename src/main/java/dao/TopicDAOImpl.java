@@ -9,7 +9,10 @@ import utils.HibernateSessionFactoryUtil;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TopicDAOImpl implements TopicDAO {
 
@@ -70,6 +73,20 @@ public class TopicDAOImpl implements TopicDAO {
     public List<Topic> findAll() {
         List<Topic> topics = (List<Topic>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Topic").list();
         return topics;
+    }
+
+    @Override
+    public List<Topic> findAllSections() {
+        Set<String> ssections = new HashSet<>();
+        List<Topic> topics = (List<Topic>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Topic").list();
+        List<Topic> sections = new ArrayList<>();
+        for (Topic topic : topics) {
+            if (!ssections.contains(topic.getSectionName())) {
+                ssections.add(topic.getSectionName());
+                sections.add(topic);
+            }
+        }
+        return sections;
     }
 
     @Override

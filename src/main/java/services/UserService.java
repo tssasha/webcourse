@@ -24,7 +24,7 @@ public class UserService {
         usersDao.update(user);
     }
 
-    List<User> findAllUsers() {
+    public List<User> findAllUsers() {
         return usersDao.findAll();
     }
 

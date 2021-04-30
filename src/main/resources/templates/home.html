@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Разделы</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="~{fragments/fheader :: header}">Header</div>
+
+<h1>Список разделов</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+        <th scope="col">Количество тем</th>
+        <th scope="col">Количество сообщений</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sect : ${sections}">
+        <td><a th:href="'/section?section=' + ${sect.getSectionName()}"> <span th:text="${sect.getSectionName()}"></span></a></td>
+        <td th:text="${5}"></td>
+        <td th:text="${20}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="~{fragments/footer :: footer}">Footer</div>
+</body>
+</html>
