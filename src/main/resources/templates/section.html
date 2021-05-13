@@ -14,20 +14,16 @@
     <thead>
     <tr>
         <th scope="col">Название</th>
-        <th scope="col">Создатель</th>
-        <th scope="col">Время последнего сообщения</th>
-        <th scope="col">Количество сообщений</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="topic : ${topics}">
         <td><a th:href="'/topic?topic=' + ${topic.getTopicName()}"> <span th:text="${topic.getTopicName()}"></span></a></td>
-        <td th:text="${1}">Name</td>
-        <td th:text="${2}"></td>
-        <td th:text="${3}"></td>
     </tr>
     </tbody>
 </table>
+
+<button type="button" class="btn btn-outline-primary" th:if="${username.length() > 0}">Создать тему</button>
 
 <div th:replace="~{fragments/footer :: footer}">Footer</div>
 </body>

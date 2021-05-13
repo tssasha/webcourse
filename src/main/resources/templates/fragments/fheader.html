@@ -7,38 +7,22 @@
 </head>
 <body>
 
-<div class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Wow forum</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li th:classappend="${module == 'home' ? 'active' : ''}">
-                    <a class="nav-link" href="#" th:href="@{/}">Главная страница</a>
-                </li>
-                <li th:classappend="${module == 'users' ? 'active' : ''}">
-                    <a class="nav-link" href="#" th:href="@{/users}">Пользователи</a>
-                </li>
-                <li th:classappend="${module == 'users' ? 'active' : ''}">
-                    <a class="nav-link" href="#" th:href="@{/users}">Моя страница</a>
-                </li>
-            </ul>
-<!--            <ul class="nav navbar-nav navbar-right">-->
-<!--                <li th:if="${#authorization.expression('!isAuthenticated()')}">-->
-<!--                    <a href="/signin" th:href="@{/signin}">-->
-<!--                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">-->
-<!--                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout-->
-<!--                    </a>-->
-<!--                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>-->
-<!--                </li>-->
-<!--            </ul>-->
-        </div>
+<nav class="py-2 bg-light border-bottom" th:fragment="header">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+            <li><a class="nav-link link-dark px-2" th:href="@{/}">Главная страница</a></li>
+            <li><a class="nav-link link-dark px-2" th:href="@{/users}">Пользователи</a></li>
+            <li><a class="nav-link link-dark px-2" th:href="'/user?user=' + ${username}" th:if="${username.length() > 0}">Моя страница</a></li>
+        </ul>
+        <span class="navbar-brand me-auto">
+            <a th:text="${username}"></a>
+        </span>
+        <ul class="nav me-auto">
+            <li><a class="navbar-text link-dark px-2" th:href="@{/user/login}" th:if="${username.length() == 0}">Вход</a></li>
+            <li><a class="navbar-text link-dark px-2" th:href="@{/user/logout}" th:if="${username.length() > 0}">Выход</a></li>
+            <li><a class="navbar-text link-dark px-2" th:href="@{/user/new}" th:if="${username.length() == 0}">Регистрация</a></li>
+        </ul>
     </div>
-</div>
+</nav>
 </body>
 </html>

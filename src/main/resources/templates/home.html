@@ -13,15 +13,11 @@
     <thead>
     <tr>
         <th scope="col">Название</th>
-        <th scope="col">Количество тем</th>
-        <th scope="col">Количество сообщений</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="sect : ${sections}">
         <td><a th:href="'/section?section=' + ${sect.getSectionName()}"> <span th:text="${sect.getSectionName()}"></span></a></td>
-        <td th:text="${5}"></td>
-        <td th:text="${20}"></td>
     </tr>
     </tbody>
 </table>

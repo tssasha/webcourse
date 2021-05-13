@@ -20,8 +20,8 @@
     <tbody>
     <tr th:each="user : ${users}">
         <td><a th:href="'/user?user=' + ${user.getUserLogin()}"> <span th:text="${user.getUserLogin()}"></span></a></td>
-        <td th:text="${5}"></td>
-        <td th:text="${20}"></td>
+        <td th:text="${user.getRights()}"></td>
+        <td th:text="${user.getRegDate()}"></td>
     </tr>
     </tbody>
 </table>

@@ -26,6 +26,11 @@
     </tbody>
 </table>
 
+<div class="form-group" th:if="${username.length() > 0}">
+    <h3> Написать сообщение </h3>
+    <textarea class="form-control" rows="3"></textarea>
+</div>
+
 <div th:replace="~{fragments/footer :: footer}">Footer</div>
 </body>
 </html>
