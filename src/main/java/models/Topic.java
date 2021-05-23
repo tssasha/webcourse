@@ -10,6 +10,9 @@ public class Topic {
 
     //@OneToMany(mappedBy = Message)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int topic_no;
+
     private String topic_name;
     private String section_name;
 
@@ -34,9 +37,14 @@ public class Topic {
         messages.remove(message);
     }
 
+    public int getTopicNo() {
+        return topic_no;
+    }
+
     public String getTopicName() {
         return topic_name;
     }
+
 
     public void setTopicName(String name) {
         topic_name = name;
@@ -44,6 +52,10 @@ public class Topic {
 
     public String getSectionName() {
         return section_name;
+    }
+
+    public int getSectionNo() {
+        return topic_no;
     }
 
     public void setSectionName(String name) {

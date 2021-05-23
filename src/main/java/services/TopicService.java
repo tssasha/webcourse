@@ -15,6 +15,10 @@ public class TopicService {
         return topicsDao.findByName(name);
     }
 
+    public Topic findByNo(int no) {
+        return topicsDao.findByNo(no);
+    }
+
     public void saveTopic(Topic topic) {
         topicsDao.save(topic);
     }

@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     <tr th:each="sect : ${sections}">
-        <td><a th:href="'/section?section=' + ${sect.getSectionName()}"> <span th:text="${sect.getSectionName()}"></span></a></td>
+        <td><a th:href="'/section?section=' + ${sect.getSectionNo()}"> <span th:text="${sect.getSectionName()}"></span></a></td>
     </tr>
     </tbody>
 </table>

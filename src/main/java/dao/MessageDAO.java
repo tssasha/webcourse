@@ -21,5 +21,7 @@ public interface MessageDAO {
 //
 //    File findFileById(int id);
 
-    List<Message> findAllMessagesInTopic(String name);
+    List<Message> findAllMessagesInTopic(int no);
+
+    Message findByNo(int no);
 }

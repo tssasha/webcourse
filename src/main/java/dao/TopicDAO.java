@@ -9,6 +9,8 @@ public interface TopicDAO {
 
     Topic findByName(String name);
 
+    Topic findByNo(int no);
+
     void save(Topic topic);
 
     void update(Topic topic);

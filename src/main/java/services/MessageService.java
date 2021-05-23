@@ -3,6 +3,7 @@ package services;
 import dao.MessageDAO;
 import dao.MessageDAOImpl;
 import models.Message;
+import models.Topic;
 
 import java.util.List;
 
@@ -22,7 +23,11 @@ public class MessageService {
         messagesDao.delete(message);
     }
 
-    public List<Message> findAllMessagesInTopic(String name) {
-        return messagesDao.findAllMessagesInTopic(name);
+    public List<Message> findAllMessagesInTopic(int no) {
+        return messagesDao.findAllMessagesInTopic(no);
+    }
+
+    public Message findByNo(int no) {
+        return messagesDao.findByNo(no);
     }
 }

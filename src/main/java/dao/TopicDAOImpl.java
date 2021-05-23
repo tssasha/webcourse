@@ -30,6 +30,19 @@ public class TopicDAOImpl implements TopicDAO {
     }
 
     @Override
+    public Topic findByNo(int no) {
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            TypedQuery<Topic> query = session.createQuery(
+                    "SELECT t FROM Topic t WHERE t.topic_no = :no"
+            ).setParameter("no", no);
+            return query.getSingleResult();
+        } catch(NoResultException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public void save(Topic topic) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
@@ -49,11 +62,15 @@ public class TopicDAOImpl implements TopicDAO {
 
     @Override
     public void delete(Topic topic) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(topic);
-        tx1.commit();
-        session.close();
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            Transaction tx1 = session.beginTransaction();
+            session.delete(topic);
+            tx1.commit();
+            session.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 //    @Override

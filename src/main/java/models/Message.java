@@ -12,52 +12,52 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int message_no;
 
-    private String topic_name;
+    private int topic_no;
     private String message;
     private String user_login;
     private java.sql.Timestamp time_stamp;
 
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<File> files;
+//    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<File> files;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_login", insertable=false, updatable=false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "topic_name", insertable=false, updatable=false)
+    @JoinColumn(name = "topic_no", insertable=false, updatable=false)
     private Topic topic;
 
     public Message() {
     }
 
-    public Message(int no, String name, String mess, String login, java.sql.Timestamp time) {
-        message_no = no;
-        topic_name = name;
+    public Message(int no, String mess, String login, java.sql.Timestamp time) {
+        //message_no = no;
+        topic_no = no;
         message = mess;
         user_login = login;
         time_stamp = time;
-        files = new ArrayList<>();
+//        files = new ArrayList<>();
     }
 
     public void addFile(File file) {
         file.setMessage(this);
-        files.add(file);
+//        files.add(file);
     }
 
-    public void removeFile(File file) {
-        files.remove(file);
-    }
+//    public void removeFile(File file) {
+//        files.remove(file);
+//    }
 
     public int getMessageNo() {
         return message_no;
     }
 
-    public String getTopicName() {
-        return topic_name;
+    public int getTopicName() {
+        return topic_no;
     }
-    public void setTopicName(String name) {
-        topic_name = name;
+    public void setTopicName(int no) {
+        topic_no = no;
     }
 
     public String getMessageText() {
@@ -95,12 +95,12 @@ public class Message {
         topic = topic1;
     }
 
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files1) {
-        files = files1;
-    }
+//    public List<File> getFiles() {
+//        return files;
+//    }
+//
+//    public void setFiles(List<File> files1) {
+//        files = files1;
+//    }
 
 }

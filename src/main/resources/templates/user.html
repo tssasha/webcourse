@@ -8,10 +8,12 @@
 <body>
 <div th:replace="~{fragments/fheader :: header}">Header</div>
 
-<h1 th:text="${user.getUserLogin()}" />
-<p th:text="'Дата регистрации: ' + ${user.getRegDate()}" />
-<p th:text="'Статус: ' + ${user.getRights()}" />
-<p th:text="'О себе: ' + ${user.getDescription()}" />
+<div id="user_info">
+    <h1 th:text="${user.getUserLogin()}" />
+    <p th:text="'Дата регистрации: ' + ${user.getRegDate()}" />
+    <p th:text="'Статус: ' + ${user.getRights()}" />
+    <p th:text="'О себе: ' + ${user.getDescription()}" />
+</div>
 
 <div th:replace="~{fragments/footer :: footer}">Footer</div>
 </body>

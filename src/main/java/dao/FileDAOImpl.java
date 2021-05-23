@@ -33,7 +33,7 @@ public class FileDAOImpl implements FileDAO {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         TypedQuery<File> query = session.createQuery(
                 "SELECT f FROM File f WHERE f.message_no = :no"
-        ).setParameter("no", no);;
+        ).setParameter("no", no);
         return query.getResultList();
     }
 }

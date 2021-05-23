@@ -10,17 +10,17 @@
 <nav class="py-2 bg-light border-bottom" th:fragment="header">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
-            <li><a class="nav-link link-dark px-2" th:href="@{/}">Главная страница</a></li>
-            <li><a class="nav-link link-dark px-2" th:href="@{/users}">Пользователи</a></li>
-            <li><a class="nav-link link-dark px-2" th:href="'/user?user=' + ${username}" th:if="${username.length() > 0}">Моя страница</a></li>
+            <li><a class="nav-link link-dark px-2" id="home" th:href="@{/}">Главная страница</a></li>
+            <li><a class="nav-link link-dark px-2" id="users" th:href="@{/users}">Пользователи</a></li>
+            <li><a class="nav-link link-dark px-2" id="my_page" th:href="'/user?user=' + ${username}" th:if="${username.length() > 0}">Моя страница</a></li>
         </ul>
         <span class="navbar-brand me-auto">
             <a th:text="${username}"></a>
         </span>
         <ul class="nav me-auto">
-            <li><a class="navbar-text link-dark px-2" th:href="@{/user/login}" th:if="${username.length() == 0}">Вход</a></li>
-            <li><a class="navbar-text link-dark px-2" th:href="@{/user/logout}" th:if="${username.length() > 0}">Выход</a></li>
-            <li><a class="navbar-text link-dark px-2" th:href="@{/user/new}" th:if="${username.length() == 0}">Регистрация</a></li>
+            <li><a class="navbar-text link-dark px-2" id="login" th:href="@{/user/login}" th:if="${username.length() == 0}">Вход</a></li>
+            <li><a class="navbar-text link-dark px-2" id="logout" th:href="@{/user/logout}" th:if="${username.length() > 0}">Выход</a></li>
+            <li><a class="navbar-text link-dark px-2" id="register" th:href="@{/user/new}" th:if="${username.length() == 0}">Регистрация</a></li>
         </ul>
     </div>
 </nav>

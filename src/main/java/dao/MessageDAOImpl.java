@@ -4,6 +4,7 @@ import models.File;
 import models.Message;
 import models.Topic;
 import models.User;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
@@ -34,11 +35,15 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public void delete(Message message) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(message);
-        tx1.commit();
-        session.close();
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            Transaction tx1 = session.beginTransaction();
+            session.delete(message);
+            tx1.commit();
+            session.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 //    @Override
@@ -73,11 +78,24 @@ public class MessageDAOImpl implements MessageDAO {
 //    }
 
     @Override
-    public List<Message> findAllMessagesInTopic(String name) {
+    public List<Message> findAllMessagesInTopic(int no) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         TypedQuery<Message> query = session.createQuery(
-                "SELECT m FROM Message m WHERE m.topic_name = :name"
-        ).setParameter("name", name);;
+                "SELECT m FROM Message m WHERE m.topic_no = :no"
+        ).setParameter("no", no);
         return query.getResultList();
+    }
+
+    @Override
+    public Message findByNo(int no) {
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            TypedQuery<Message> query = session.createQuery(
+                    "SELECT m FROM Message m WHERE m.message_no = :no"
+            ).setParameter("no", no);
+            return query.getSingleResult();
+        } catch(NoResultException ex) {
+            return null;
+        }
     }
 }
