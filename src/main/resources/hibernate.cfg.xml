@@ -10,6 +10,7 @@
         <property name="connection.username">sasha</property>
         <property name="connection.password">kallaks</property>
         <property name="show_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
 
         <mapping class="models.File" />
         <mapping class="models.Message" />

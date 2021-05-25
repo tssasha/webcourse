@@ -35,15 +35,11 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public void delete(Message message) {
-        try {
-            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-            Transaction tx1 = session.beginTransaction();
-            session.delete(message);
-            tx1.commit();
-            session.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        session.delete(message);
+        tx1.commit();
+        session.close();
     }
 
 //    @Override
@@ -83,19 +79,19 @@ public class MessageDAOImpl implements MessageDAO {
         TypedQuery<Message> query = session.createQuery(
                 "SELECT m FROM Message m WHERE m.topic_no = :no"
         ).setParameter("no", no);
-        return query.getResultList();
+        List<Message> messages = query.getResultList();
+        session.close();
+        return messages;
     }
 
     @Override
     public Message findByNo(int no) {
-        try {
-            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-            TypedQuery<Message> query = session.createQuery(
-                    "SELECT m FROM Message m WHERE m.message_no = :no"
-            ).setParameter("no", no);
-            return query.getSingleResult();
-        } catch(NoResultException ex) {
-            return null;
-        }
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        TypedQuery<Message> query = session.createQuery(
+                "SELECT m FROM Message m WHERE m.message_no = :no"
+        ).setParameter("no", no);
+        Message message = query.getSingleResult();
+        session.close();
+        return message;
     }
 }

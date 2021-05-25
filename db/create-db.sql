@@ -31,6 +31,6 @@ DELETE from messages where message_no = 27;
 
 DELETE from files where file = 'path';
 
-DELETE from messages where message_no = 183;
+DELETE from messages where message_no = 184;
 DELETE from topics where topic_name = 'Тестовая тема';
 DELETE from users where user_login = 'testUser';

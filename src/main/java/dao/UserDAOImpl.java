@@ -14,15 +14,18 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByLogin(String login) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        TypedQuery<User> query = session.createQuery(
+                "SELECT u FROM User u WHERE u.user_login = :login"
+        ).setParameter("login", login);
         try {
-            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-            TypedQuery<User> query = session.createQuery(
-                    "SELECT u FROM User u WHERE u.user_login = :login"
-            ).setParameter("login", login);
-            return query.getSingleResult();
-        } catch(NoResultException ex) {
-            return null;
+            User user = query.getSingleResult();
+            session.close();
+            return user;
         }
+        catch (NoResultException nre){}
+        session.close();
+        return null;
     }
 
     @Override
@@ -45,15 +48,11 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(User user) {
-        try {
-            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-            Transaction tx1 = session.beginTransaction();
-            session.delete(user);
-            tx1.commit();
-            session.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        session.delete(user);
+        tx1.commit();
+        session.close();
     }
 
 //    @Override
@@ -71,7 +70,9 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        List<User> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<User> users = (List<User>) session.createQuery("From User").list();
+        session.close();
         return users;
     }
 }

@@ -37,6 +37,21 @@ public class UsersController {
         return "user";
     }
 
+    @GetMapping("/user_edit")
+    String user_edit(@CookieValue(value = "username", defaultValue = "") String username, Model model) {
+        model.addAttribute("username", username);
+        return "user_edit";
+    }
+
+    @PostMapping("/userEdit")
+    String userEdit(@RequestParam(name="username", required=true) String username,
+                    @RequestParam(name="information", required=true) String information) {
+        User user = userService.findUser(username);
+        user.setDescription(information);
+        userService.updateUser(user);
+        return String.format("redirect:/user?user=%s", username);
+    }
+
     @GetMapping("/user/new")
     String getSignUp(@RequestParam(name="er", required=false) String er, Model model) {
         model.addAttribute("type", "Регистрация");

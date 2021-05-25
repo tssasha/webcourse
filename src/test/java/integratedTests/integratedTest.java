@@ -49,7 +49,7 @@ public class integratedTest {
     @Test()
     public void userRegisterLoginSaveTopicMessageTest() {
         Date date = new Date(System.currentTimeMillis());
-        User user = new User("testUser", "12345678", date, "Пользователь", null);
+        User user = new User("testUser", "12345678", date, "Пользователь", "Тестовое описание");
 
         driver.get(appURL);  // go to the root url
         Assert.assertEquals(driver.getTitle(), "Разделы");
@@ -67,6 +67,10 @@ public class integratedTest {
         driver.findElement(By.id("submit_button")).click();
         Assert.assertEquals(driver.getTitle(), "Пользователь");
 
+        driver.findElement(By.id("inf_edit")).click();
+        Assert.assertEquals(driver.getTitle(), "Редактирование информации");
+        driver.findElement(By.id("inf_edit")).sendKeys(user.getDescription());
+        driver.findElement(By.id("submit_button")).click();
         String userInfoText = driver.findElement(By.id("user_info")).getText();
         assertUserIsEqualToWebInfo(user, userInfoText);
 
@@ -96,6 +100,11 @@ public class integratedTest {
         String tableTopicText = driver.findElement(By.id("messages_table")).getText();
         Assert.assertTrue(tableTopicText.contains(message.getMessageText()));
 
+        driver.findElement(By.id("delete")).click();
+        tableTopicText = driver.findElement(By.id("messages_table")).getText();
+        Assert.assertFalse(tableTopicText.contains(message.getMessageText()));
+
+        driver.findElement(By.id("logout")).click();
 
         UserService userService = new UserService();
         TopicService topicService = new TopicService();

@@ -23,13 +23,13 @@
         <td th:text="${mess.getUserLogin()}">Name</td>
         <td th:text="${mess.getTimeStamp()}"></td>
         <td th:text="${mess.getMessageText()}"></td>
-<!--        <td>-->
-<!--        <form method="post" action="/delMessage">-->
-<!--            <input type="hidden" name="topic_no" th:value="${topic_no}"/>-->
-<!--            <input type="hidden" name="message_no" th:value="${mess.getMessageNo()}"/>-->
-<!--            <button type="submit" class="btn btn-outline-secondary" th:if="${username == mess.getUserLogin()}">Удалить</button>-->
-<!--        </form>-->
-<!--        </td>-->
+        <td>
+        <form method="post" action="/delMessage">
+            <input type="hidden" name="topic_no" th:value="${topic_no}"/>
+            <input type="hidden" name="message_no" th:value="${mess.getMessageNo()}"/>
+            <button type="submit" class="btn btn-outline-secondary" id="delete" th:if="${username == mess.getUserLogin()}">Удалить</button>
+        </form>
+        </td>
     </tr>
     </tbody>
 </table>

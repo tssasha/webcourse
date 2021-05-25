@@ -15,6 +15,10 @@
     <p th:text="'О себе: ' + ${user.getDescription()}" />
 </div>
 
+<form class="form-group" th:if="${username == user.getUserLogin()}" action="/user_edit" method="get">
+    <button type="submit" id="inf_edit" class="btn btn-outline-primary">Редактировать информацию</button>
+</form>
+
 <div th:replace="~{fragments/footer :: footer}">Footer</div>
 </body>
 </html>

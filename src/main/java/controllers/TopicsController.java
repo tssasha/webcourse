@@ -2,6 +2,7 @@ package controllers;
 
 import models.Message;
 import models.Topic;
+import models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -85,14 +86,12 @@ public class TopicsController {
         return String.format("redirect:/topic?topic=%d", topic_no);
     }
 
-//    @PostMapping("/delMessage")
-//    String delMessage(@RequestParam(name="topic_no") int topic_no,
-//                      @RequestParam(name="message_no") int message_no) {
-//        System.out.println("---------------------------------------");
-//        Message message = messageService.findByNo(message_no);
-//        System.out.println(message.getMessageNo());
-//        messageService.deleteMessage(message);
-//        return String.format("redirect:/topic?topic=%d", topic_no);
-//    }
+    @PostMapping("/delMessage")
+    String delMessage(@RequestParam(name="topic_no") int topic_no,
+                      @RequestParam(name="message_no") int message_no) {
+        Message message = messageService.findByNo(message_no);
+        messageService.deleteMessage(message);
+        return String.format("redirect:/topic?topic=%d", topic_no);
+    }
 
 }
